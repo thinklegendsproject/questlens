@@ -72,9 +72,21 @@ exports.onQuestSubmit = functions.firestore
 
       // Award the user by updating their profile
       const userRef = db.collection("users").doc(userId);
+      const userDoc = await userRef.get();
+      const userData = userDoc.data();
+
       await userRef.update({
         xp: admin.firestore.FieldValue.increment(xp),
         coins: admin.firestore.FieldValue.increment(coins),
+      });
+
+      // Create a social feed entry
+      await db.collection("socialFeed").add({
+        userId: userId,
+        userName: userData.email, // Or a displayName if you have one
+        questId: questId,
+        questTitle: questData.title,
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
       });
 
       console.log(`User ${userId} completed quest ${questId} and earned ${xp} XP and ${coins} coins.`);
