@@ -10,6 +10,7 @@ import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import MainAppNavigator from './MainAppNavigator';
 import QuestDetailScreen from '../screens/QuestDetailScreen';
 import CameraScreen from '../screens/CameraScreen';
+import TeamChatScreen from '../screens/TeamChatScreen';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,7 @@ const AppNavigator = () => {
             <Stack.Screen name="MainApp" component={MainAppNavigator} />
             <Stack.Screen name="QuestDetail" component={QuestDetailScreen} />
             <Stack.Screen name="Camera" component={CameraScreen} />
+            <Stack.Screen name="TeamChat" component={TeamChatScreen} />
           </>
         ) : (
           <>

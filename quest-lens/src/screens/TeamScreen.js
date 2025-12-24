@@ -4,9 +4,9 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDoc, addDoc, collection, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { app } from '../config/firebase';
 
-const TeamScreen = () => {
+const TeamScreen = ({ navigation }) => {
   const [teamData, setTeamData] = useState(null);
-  const [userData, setUserData] = useState(null);
+  const [teamId, setTeamId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [teamName, setTeamName] = useState('');
 
@@ -21,8 +21,8 @@ const TeamScreen = () => {
       const userDocSnap = await getDoc(userDocRef);
       if (userDocSnap.exists()) {
         const fetchedUserData = userDocSnap.data();
-        setUserData(fetchedUserData);
         if (fetchedUserData.teamId) {
+          setTeamId(fetchedUserData.teamId);
           const teamDocRef = doc(db, 'teams', fetchedUserData.teamId);
           const teamDocSnap = await getDoc(teamDocRef);
           if (teamDocSnap.exists()) {
@@ -86,6 +86,9 @@ const TeamScreen = () => {
         {teamData.members.map((memberId) => (
           <Text key={memberId} style={styles.memberText}>{memberId}</Text>
         ))}
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TeamChat', { teamId })}>
+          <Text style={styles.buttonText}>Go to Chat</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -136,6 +139,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
+        marginTop: 20,
     },
     buttonText: {
         color: '#FFFFFF',
