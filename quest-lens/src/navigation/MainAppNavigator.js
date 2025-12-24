@@ -1,20 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AvailableQuestsScreen from '../screens/AvailableQuestsScreen';
-import { View, Text } from 'react-native';
-
-// Placeholder components for screens to be developed
-const SocialFeedScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0B0F1A' }}>
-    <Text style={{ color: 'white' }}>Social Feed Screen</Text>
-  </View>
-);
-
-const ProfileScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0B0F1A' }}>
-    <Text style={{ color: 'white' }}>Profile Screen</Text>
-  </View>
-);
+import SocialFeedScreen from '../screens/SocialFeedScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import TeamScreen from '../screens/TeamScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,6 +19,7 @@ const MainAppNavigator = () => {
     >
       <Tab.Screen name="Quests" component={AvailableQuestsScreen} />
       <Tab.Screen name="Social" component={SocialFeedScreen} />
+      <Tab.Screen name="Team" component={TeamScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
